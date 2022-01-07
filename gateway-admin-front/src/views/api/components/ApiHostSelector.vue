@@ -2,7 +2,7 @@
   <div>
     <template v-if="mode === 'view'">{{description}}</template>
     <template v-if="mode === 'editor'">
-      <el-input placeholder="http://127.0.0.1:8086" v-model="currentValue"/>
+      <el-input placeholder="http://10.1.16.33:8082" v-model="currentValue" />
     </template>
   </div>
 </template>
@@ -24,9 +24,7 @@
       }
     },
     created() {
-      this.currentValue = this.enabledOptions.length > 0
-        ? this.enabledOptions[0].value
-        : ''
+      this.currentValue = this.enabledOptions && this.enabledOptions.length > 0 && this.enabledOptions[0].value ? this.enabledOptions[0].value: 'http://10.1.16.33:8082'
     },
     watch: {
       value(val) {

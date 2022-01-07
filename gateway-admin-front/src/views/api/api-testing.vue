@@ -174,7 +174,7 @@
     },
     computed: {
       url() {
-        let result = (this.request.url || '/gateway')
+        let result = (this.request.url + '/gateway')
           + '?api=' + this.meta.apiName
         this.request.params
           .filter(it => it.value && this.headerParams.indexOf(it.sourceName) === -1)

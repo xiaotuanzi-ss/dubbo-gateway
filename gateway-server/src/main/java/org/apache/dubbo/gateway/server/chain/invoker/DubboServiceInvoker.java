@@ -152,7 +152,7 @@ public class DubboServiceInvoker implements ApiFilter {
 
         //noinspection unchecked
         resultMap = (Map<String, Object>) invokeResult;
-        Object codeObj = resultMap.get("code");
+        Object codeObj = resultMap.get("status");
         if (codeObj == null) {
             return ApiResults.get(ApiCode.BIZ_DUBBO_RESPONSE_FORMAT_ERROR,
                     "[Invalid dubbo service response]code was null");
@@ -170,8 +170,8 @@ public class DubboServiceInvoker implements ApiFilter {
         }
 
         //取出数据和描述
-        data = resultMap.get("data");
-        msg = (String) resultMap.get("msg");
+        data = resultMap.get("object");
+        msg = (String) resultMap.get("message");
 
         //删除data里的class属性
         try {
@@ -192,7 +192,7 @@ public class DubboServiceInvoker implements ApiFilter {
     private InvokeParam convertToInvokeParam(Map<String, Object> source, ApiParam param) throws ApiHandlerException {
         if (ApiParamType.getByCode(param.getParamType()) == ApiParamType.OBJECT) {
             // 对象类型，需要对对象的类名进行合法性校验(控制后台需要保障一定要输入合法的类名)
-            if (!ObjectUtils.isEmpty(param.getClassName())) {
+            if (ObjectUtils.isEmpty(param.getClassName())) {
                 throw new ApiHandlerException(ApiCode.GATEWAY_ERROR,
                         "【非法的参数类型】" + param.getSourceName() + "缺少对应的类声明");
             }

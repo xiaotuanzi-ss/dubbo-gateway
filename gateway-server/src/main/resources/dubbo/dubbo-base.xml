@@ -14,7 +14,7 @@
             id="bootstrapService"
             interface="org.apache.dubbo.gateway.api.service.BootstrapService"
             protocol="dubbo"
-            check="true"
+            check="false"
             retries="2"
             lazy="false"
             timeout="1000">
